@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ListContacts from "./ListContacts";
 
+
 class App extends Component {
 
   state = {
@@ -27,11 +28,27 @@ class App extends Component {
     ]
   }
 
+  removeContact = (contact) => {
+    this.setState((previousState) => {
+
+      const contacts = previousState.contacts.filter(c => c.id !== contact.id)
+
+      return {
+        contacts
+      }
+    });
+
+    //console.log(contact.id)
+  }
+
   render() {
-    const {contacts} = this.state;
+    const { contacts } = this.state;
     return (
       <div>
-        <ListContacts contacts={contacts} />
+        <ListContacts
+          contacts={contacts}
+          remove={this.removeContact}
+        />
       </div>
     )
   }
